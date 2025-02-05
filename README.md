@@ -13,6 +13,11 @@ My goals for this project are to add the following functionality:
 - Add the ability to reply to a specific tweet
 - Personalize the project to become my own
 
+## Known Limitations
+When clicking on the like/retweet icons, the page state is reset. For example, if a user uses the keyboard to like a tweet, the keyboard cursor position is reset. Additionally, if a user deletes a post using the trash can or views replies, and then clicks the like/retweet icons, the deleted post and viewed replies are reset to their default state.
+
+This occurs due to the page re-rendering, as JavaScript resets the state to default. This behavior persists as of now, but improvements are being explored.
+
 ## Installation
 To run this project locally:
 

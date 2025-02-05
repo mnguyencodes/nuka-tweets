@@ -1,15 +1,25 @@
+@font-face {
+    font-family: "IntelOne";
+    src: url("/fonts/IntelOneMono-Regular.ttf")
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/InterVariable.ttf")
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 /* typography and icons */
 
 h1{
-    color: #0F8CDF;
+    color: #BD2524;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 i{
@@ -53,14 +63,14 @@ textarea{
     resize: none;
     padding: 10px;
     margin: 0 0 20px 0;
-    height: 60px;
+    height: 80px;
     width: 100%;
-    font-size: 20px;
-    line-height: 30px;
+    line-height: 20px;
 }
 
 button{
-    background-color: #1DA1F2;
+    font-family: inherit;
+    background-color: #BD2524;
     border: none;
     color: white;
     padding: 10px 19px;
@@ -105,6 +115,12 @@ button{
     width: 80%;
 }
 
+.handle-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
 .handle{
     font-size: 12px;
     font-weight: 500;
@@ -113,20 +129,29 @@ button{
 }
 
 .tweet-text{
+    margin-top: 0;
     width: 207px;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 /* images */
 
 .profile-pic{
-    border: 1px solid lightgray;
     border-radius: 50%;
     width: 48px;
 }
 
 /* utility */
+
 .hidden{
     display: none;
+}
+
+.intel{
+    font-family: "IntelOne", sans-serif;
+}
+
+.mb0{
+    margin-bottom: 0;
 }
