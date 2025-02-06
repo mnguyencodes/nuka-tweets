@@ -74,8 +74,6 @@ function handleTrashCanAction(tweetId){
     document.querySelector(`#tweets-${tweetId}`).classList.add("hidden")
 }
 
-
-
 function getFeedHtml(){
     let feedHtml = ``
     
@@ -99,15 +97,14 @@ function getFeedHtml(){
                     <img src="${reply.profilePic}" class="profile-pic">
                     <div>
                         <p class="handle">${reply.handle}</p>
-                        <p class="tweet-text">${reply.tweetText}</p>
+                        <p id="reply-text-${tweet.uuid}" class="tweet-text">${tweet.tweetText}</p>
                     </div>
                 </div>
             </div>
             `
             })
         }
-        
-        
+
     feedHtml += `
     <div class="tweet" id=tweets-${tweet.uuid}>
         <div class="tweet-inner">
@@ -116,7 +113,10 @@ function getFeedHtml(){
                 <div class="mb0 handle-container">
                     <p class="handle">${tweet.handle}</p>
                 </div>
-                <p class="tweet-text">${tweet.tweetText}</p>
+                <p id="tweet-text-${tweet.uuid}" class="tweet-text"></p>
+                
+                
+                
                 <div class="tweet-details">
                     <span class="tweet-detail">
                         <i tabindex="0" class="fa-regular fa-comment-dots"
@@ -145,33 +145,34 @@ function getFeedHtml(){
         </div>   
     </div>
     `
-    
-    // const safeTweetTextEl = document.getElementsByClassName("tweet-text")
-    // for (let text of safeTweetTextEl){
-    //     // console.log(text)
-    // }
-    // // console.log(safeTweetTextEl)
-    // // safeTweetTextEl.textContent = tweet.tweetText
-    // // console.log(safeTweetTextEl.textContent)
-
    })
    return feedHtml 
 }
 
+function setTweetTexts(){
+
+    // tweetsData.forEach(tweet=>{
+    //     if (tweet.replies.length > 0){
+    //         tweet.replies.forEach(reply=>{
+    //             // console.log(reply.tweetText)
+    //             // const replyTextEl = document.querySelector(`#reply-text-${tweet.uuid}`)
+    //             document.querySelector(`#reply-text-${tweet.uuid}`).textContent = reply.tweetText
+    //             console.log(document.querySelector(`#reply-text-${tweet.uuid}`))
+    //             // replyTextEl.textContent = reply.tweetText
+
+    //         })
+    //     }
+    // })
+
+    tweetsData.forEach(tweet=>{
+        const tweetTextEl = document.querySelector(`#tweet-text-${tweet.uuid}`)
+        tweetTextEl.textContent = tweet.tweetText
+    })
+}
+
 function render(){
-
-    // const htmlString = getFeedHtml()
-    // const safeTweetTextEl = document.getElementsByClassName("tweet-text")
-    // for (let text of safeTweetTextEl){
-    //     text.textContent = text.tweetText
-    //     console.log(text.textContent)
-    // }
-    // document.getElementById("feed").innerHTML = htmlString
-    // console.log(safeTweetTextEl)
-
-    // We need to make changes to this, as the current state can allow
-    // people to input malicious code.
     document.getElementById("feed").innerHTML = getFeedHtml()
+    setTweetTexts()
 }
 
 render()
