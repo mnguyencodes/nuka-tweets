@@ -22,11 +22,13 @@ export const tweetsData = [
                 handle: `@TomCruise ✅`,
                 profilePic: `images/tcruise.png`,
                 tweetText: `Yes! Sign me up! 😎🛩`,
+                uuid: `d8bdd6a2-f269-4a5d-a29b-7d0c592d0546`
             },
                   {
                 handle: `@ChuckNorris ✅`,
                 profilePic: `images/chucknorris.jpeg`,
                 tweetText: `I went last year😴`,
+                uuid: `fd999752-7a47-48ad-a0b8-595c05459094`
             },
         ],
         isLiked: false,
@@ -44,11 +46,13 @@ export const tweetsData = [
                 handle: `@StackOverflower ☣️`,
                 profilePic: `images/overflow.png`,
                 tweetText: `No. Obviosuly not. Go get a job in McDonald's.`,
+                uuid: `c8abd063-6d9f-47cd-b3e7-7f4b20f839f5`
             },
             {
                 handle: `@YummyCoder64`,
                 profilePic: `images/love.png`,
                 tweetText: `You are wonderful just as you are! ❤️`,
+                uuid: `e8f55c9a-f225-4527-9d8a-546787d61fc5`
             },
         ],
         isLiked: false,

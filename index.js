@@ -92,12 +92,12 @@ function getFeedHtml(){
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
                 repliesHtml+=`
-            <div class="tweet-reply">
+            <div class="tweet-reply" id="replies-${reply.uuid}">
                 <div class="tweet-inner">
                     <img src="${reply.profilePic}" class="profile-pic">
                     <div>
                         <p class="handle">${reply.handle}</p>
-                        <p id="reply-text-${tweet.uuid}" class="tweet-text">${tweet.tweetText}</p>
+                        <p id="reply-text-${reply.uuid}" class="tweet-text"></p>
                     </div>
                 </div>
             </div>
@@ -136,6 +136,11 @@ function getFeedHtml(){
                         ></i>
                         ${tweet.retweets}
                     </span>
+                    <span class="tweet-detail">
+                        <i tabindex="0" class="fa-solid fa-reply"
+                        data-reply-action="${tweet.uuid}"
+                        ></i>
+                    </span>
                     ${trashCan}
                 </div>   
             </div>            
@@ -151,18 +156,13 @@ function getFeedHtml(){
 
 function setTweetTexts(){
 
-    // tweetsData.forEach(tweet=>{
-    //     if (tweet.replies.length > 0){
-    //         tweet.replies.forEach(reply=>{
-    //             // console.log(reply.tweetText)
-    //             // const replyTextEl = document.querySelector(`#reply-text-${tweet.uuid}`)
-    //             document.querySelector(`#reply-text-${tweet.uuid}`).textContent = reply.tweetText
-    //             console.log(document.querySelector(`#reply-text-${tweet.uuid}`))
-    //             // replyTextEl.textContent = reply.tweetText
-
-    //         })
-    //     }
-    // })
+    tweetsData.forEach(tweet=>{
+        if (tweet.replies.length > 0){
+            tweet.replies.forEach(reply=>{
+                document.querySelector(`#reply-text-${reply.uuid}`).textContent = reply.tweetText
+            })
+        }
+    })
 
     tweetsData.forEach(tweet=>{
         const tweetTextEl = document.querySelector(`#tweet-text-${tweet.uuid}`)
@@ -176,3 +176,11 @@ function render(){
 }
 
 render()
+
+function generateUuid(number){
+    for(let i = 0; i < number; i++){
+        console.log(uuidv4())
+    }
+}
+
+generateUuid(4)
