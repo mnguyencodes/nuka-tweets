@@ -145,11 +145,32 @@ function getFeedHtml(){
         </div>   
     </div>
     `
+    
+    // const safeTweetTextEl = document.getElementsByClassName("tweet-text")
+    // for (let text of safeTweetTextEl){
+    //     // console.log(text)
+    // }
+    // // console.log(safeTweetTextEl)
+    // // safeTweetTextEl.textContent = tweet.tweetText
+    // // console.log(safeTweetTextEl.textContent)
+
    })
    return feedHtml 
 }
 
 function render(){
+
+    // const htmlString = getFeedHtml()
+    // const safeTweetTextEl = document.getElementsByClassName("tweet-text")
+    // for (let text of safeTweetTextEl){
+    //     text.textContent = text.tweetText
+    //     console.log(text.textContent)
+    // }
+    // document.getElementById("feed").innerHTML = htmlString
+    // console.log(safeTweetTextEl)
+
+    // We need to make changes to this, as the current state can allow
+    // people to input malicious code.
     document.getElementById("feed").innerHTML = getFeedHtml()
 }
 
