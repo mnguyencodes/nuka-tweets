@@ -71,7 +71,7 @@ function handleTweetBtnAction(){
 }
 
 function handleTrashCanAction(tweetId){
-    document.querySelector(`#tweets-${tweetId}`).classList.add("hidden")
+    removeTweet(tweetId)
 }
 
 function getFeedHtml(){
@@ -168,6 +168,17 @@ function setTweetTexts(){
         const tweetTextEl = document.querySelector(`#tweet-text-${tweet.uuid}`)
         tweetTextEl.textContent = tweet.tweetText
     })
+}
+
+function removeTweet(tweetId){
+    document.querySelector(`#tweets-${tweetId}`).remove()
+    for (let i = 0; i < tweetsData.length; i++){
+        const tweetPost = tweetsData[i]
+        if (tweetPost.uuid === tweetId){
+            tweetsData.splice(i, 1)
+            break
+        }
+    }
 }
 
 function render(){
