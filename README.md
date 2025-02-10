@@ -1,4 +1,4 @@
-# Practicing HTML and CSS
+# NukaTweets
 
 Welcome to NukaTweets, a Twitter clone project that I'm working on as part of Scrimba's Frontend Developer Career Path. This project allows me to apply and enhance my HTML and CSS skills, as well as dive into JavaScript and localStorage. My goal is to create a mock version of Twitter to practice and showcase my skills and knowledge.
 
