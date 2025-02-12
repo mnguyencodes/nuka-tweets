@@ -20,6 +20,15 @@ function handleInteraction(e){
     else if(e.target.id === "tweet-btn"){
         handleTweetBtnAction()
     }
+    else if(e.target.dataset.replyActionIcon){
+        handleReplyActionIcon(e.target.dataset.replyActionIcon)
+    }
+    else if(e.target.id === "reply-btn"){
+        handleReplyActionBtn(document.querySelector("#reply-input"))
+    }
+    else if (e.target.id === "close-modal-btn"){
+        handleCloseModalBtn()
+    }
     else if(e.target.dataset.trashCan){
         handleTrashCanAction(e.target.dataset.trashCan)
     }
@@ -52,22 +61,55 @@ function handleReplyAction(replyId){
 
 function handleTweetBtnAction(){
     const tweetInput = document.getElementById("tweet-input")
+    addTweet(tweetInput, tweetsData)
+}
 
-    if(tweetInput.value){
-        tweetsData.unshift({
-            handle: `@You`,
-            profilePic: `/images/vault_boy.png`,
-            likes: 0,
-            retweets: 0,
-            tweetText: tweetInput.value,
-            replies: [],
-            isLiked: false,
-            isRetweeted: false,
-            uuid: uuidv4()
-        })
-    render()
-    tweetInput.value = ""
+function handleCloseModalBtn(){
+    document.getElementById("modal").style.display = "none"
+}
+
+function addTweet(inputEl, arr){
+    if (!inputEl.value){
+        return false
     }
+    arr.unshift({
+        handle: `@You`,
+        profilePic: `/images/vault_boy.png`,
+        likes: 0,
+        retweets: 0,
+        tweetText: inputEl.value,
+        replies: [],
+        isLiked: false,
+        isRetweeted: false,
+        uuid: uuidv4()
+    })
+    render()
+    inputEl.value = ""
+    return true
+}
+
+function handleReplyActionIcon(tweetId){
+    document.getElementById("modal").style.display = "block"
+
+    const userHandle = tweetsData.filter(tweet=>tweet.uuid === tweetId)[0].handle
+    const replyInputEl = document.getElementById("reply-input")
+    replyInputEl.placeholder = `Reply to ${userHandle}`
+
+    /* Store UUID of tweet into name attribute of textarea input.
+    This allows me to find out **which tweet-replies array** to add
+    in the new reply. */
+    replyInputEl.name = tweetId
+}
+
+function handleReplyActionBtn(replyInput){
+    for (let tweet of tweetsData){
+        if (tweet.uuid === replyInput.name){
+            if (addTweet(replyInput, tweet.replies)) {
+                document.getElementById("modal").style.display = "none"
+            }
+        }
+    }
+    render()
 }
 
 function handleTrashCanAction(tweetId){
@@ -114,9 +156,6 @@ function getFeedHtml(){
                     <p class="handle">${tweet.handle}</p>
                 </div>
                 <p id="tweet-text-${tweet.uuid}" class="tweet-text"></p>
-                
-                
-                
                 <div class="tweet-details">
                     <span class="tweet-detail">
                         <i tabindex="0" class="fa-regular fa-comment-dots"
@@ -138,7 +177,7 @@ function getFeedHtml(){
                     </span>
                     <span class="tweet-detail">
                         <i tabindex="0" class="fa-solid fa-reply"
-                        data-reply-action="${tweet.uuid}"
+                        data-reply-action-icon="${tweet.uuid}"
                         ></i>
                     </span>
                     ${trashCan}
@@ -154,8 +193,8 @@ function getFeedHtml(){
    return feedHtml 
 }
 
+/* Prevent user from injecting malicious code. */
 function setTweetTexts(){
-
     tweetsData.forEach(tweet=>{
         if (tweet.replies.length > 0){
             tweet.replies.forEach(reply=>{
@@ -188,10 +227,11 @@ function render(){
 
 render()
 
+/* Generate UUIDs */
 function generateUuid(number){
     for(let i = 0; i < number; i++){
         console.log(uuidv4())
     }
 }
 
-generateUuid(4)
+//generateUuid(4)
