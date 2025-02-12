@@ -1,5 +1,5 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<!-- CSS -->
 	<link rel="stylesheet" href="index.css">
@@ -17,20 +17,25 @@
 			<img src="images/vault_boy.png" class="profile-pic">
 			<textarea placeholder="Refreshingly explosive conversations!" id="tweet-input"></textarea>
 		</div>
-		<button class="intel" id="tweet-btn">Tweet</button>
+		<button class="btn tweet-btn intel" id="tweet-btn">Tweet</button>
 		<div class="feed" id="feed">
 			<!-- Tweets here!! -->
 		</div>
 	</main>
-	<div class="modal" id="modal">
-		<div class="close-modal-btn-container">
-			<button class="modal-close-btn">X</button>
-		</div>
+	<div class="inter modal" id="modal">
 		<div class="modal-inner" id="modal-inner">
-			<h2>Reply to @handle</h2>
+			<div>
+				<p class="mt0 mb0">Sip the future!</p>
+			</div>
+			<div class="close-modal-btn-container">
+				<button id="close-modal-btn" class="close-modal-btn">X</button>
+			</div>
 		</div>
+		<div>
+			<textarea id="reply-input"></textarea>
+		</div>
+		<button id="reply-btn" class="btn reply-btn">Reply</button>
 	</div>
 	<script src="index.js" type="module"></script>
 </body>
-
 </html>

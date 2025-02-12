@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: "IntelOne";
     src: url("/fonts/IntelOneMono-Regular.ttf")
@@ -16,22 +22,27 @@ html, body {
 
 /* typography and icons */
 
-h1{
+h1 {
     color: #BD2524;
     margin-bottom: 10px;
     font-size: 24px;
 }
 
-i{
+input {
+    /* font-family: "Inter", sans-serif; */
+    font-family: inherit;
+}
+
+i {
     font-size: 15px;
     cursor: pointer;
 }
 
-.fa-solid{
+.fa-solid {
     color: #999;
 }
 
-.liked{
+.liked {
     color: red;
 }
 
@@ -41,12 +52,12 @@ i{
 
 /* layout */
 
-main, header{
+main, header {
     width: 290px;
     margin: 0 auto;
 }
 
-header{
+header {
     padding-bottom: 25px;
 }
 
@@ -58,7 +69,7 @@ header{
 
 /* textareas + btn */
 
-textarea{
+textarea {
     border: none;
     resize: none;
     padding: 10px;
@@ -68,90 +79,156 @@ textarea{
     line-height: 20px;
 }
 
-button{
+button {
     font-family: inherit;
     background-color: #BD2524;
-    border: none;
     color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn {
+    font-weight: 600;
+}
+
+.tweet-btn {
     padding: 10px 19px;
     border-radius: 20px;
-    width: 100%; 
-    cursor: pointer;
     font-size: 20px;
-    font-weight: 600;
+    margin: 0;
+    width: 100%;
+}
+
+.reply-btn {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 20px;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
 }
 
 /* tweet */
 
-.tweet{
+.tweet {
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0;
     width: 100%;
     margin: 15px 0;
 }
 
-.tweet-inner{
+.tweet-inner {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
 
-.tweet-details{
+.tweet-details {
     display: flex;
     font-size: 13px;
     justify-content: space-between;
     width: 160px;
 }
 
-.tweet-detail{
+.tweet-detail {
     display: flex;
     gap: 4px;
 }
 
-.tweet-reply{
+.tweet-reply {
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0px;
     margin: 10px 0 10px 40px;
     width: 80%;
 }
 
-.handle-container{
+.handle-container {
     display: flex;
     justify-content: space-between;
     padding: 0;
 }
 
-.handle{
+.handle {
     font-size: 12px;
     font-weight: 500;
     color: #555;
     margin-top: 0;
 }
 
-.tweet-text{
+.tweet-text {
     margin-top: 0;
     width: 207px;
     font-size: 12px;
     line-height: 16px;
 }
 
+/* Modal */
+
+.modal {
+    display: none;
+    font-family: "IntelOne";
+    width: 290px;
+    min-height: 175px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: white;
+    border: 1px solid #BD2524;
+}
+
+.modal p {
+    color: #BD2524;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-left: 6px;
+    padding-right: 25px;
+    margin: 0;
+}
+
+.modal-inner {
+    display: flex;
+}
+
+.close-modal-btn-container {
+    width: 35px;
+    height: 35px;
+    padding: 5px 5px;
+    margin-left: auto;
+}
+
+.close-modal-btn {
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.modal textarea {
+    display: block;
+    margin: 15px auto;
+    width: 95%;
+}
+
 /* images */
 
-.profile-pic{
+.profile-pic {
     border-radius: 50%;
     width: 48px;
 }
 
 /* utility */
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.intel{
+.intel {
     font-family: "IntelOne", sans-serif;
 }
 
-.mb0{
+.mb0 {
     margin-bottom: 0;
 }
