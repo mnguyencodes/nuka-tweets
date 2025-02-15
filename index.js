@@ -120,11 +120,12 @@ function handleTrashCanAction(tweetId){
 
 function getFeedHtml(){
     let feedHtml = ``
-    
+    let i = 0
     tweetsData.forEach(function(tweet){
         const tweetFromLocalStorage = JSON.parse(localStorage.getItem(`targetTweetObj-${tweet.uuid}`))
         if (tweetFromLocalStorage){
             tweet = tweetFromLocalStorage
+            tweetsData[i] = tweetFromLocalStorage
         }
         let likeIconClass = tweet.isLiked ? "liked" : ""
         let retweetIconClass = tweet.isRetweeted ? "retweeted" : ""
@@ -194,6 +195,7 @@ function getFeedHtml(){
         </div>   
     </div>
     `
+    i++
    })
    return feedHtml 
 }
