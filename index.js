@@ -1,5 +1,7 @@
-import { tweetsData } from "./data.js"
+import { data } from "./data.js"
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+
+let tweetsData = data
 
 document.addEventListener("click", handleInteraction)
 document.addEventListener("keydown", handleInteraction)
@@ -64,6 +66,7 @@ function handleReplyAction(replyId){
 function handleTweetBtnAction(){
     const tweetInput = document.getElementById("tweet-input")
     addTweet(tweetInput, tweetsData)
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
 }
 
 function handleCloseModalBtn(){
@@ -85,6 +88,7 @@ function addTweet(inputEl, arr){
         isRetweeted: false,
         uuid: uuidv4()
     })
+    localStorage.setItem(`${inputEl}`, JSON.stringify(arr))
     render()
     inputEl.value = ""
     return true
@@ -108,6 +112,7 @@ function handleReplyActionBtn(replyInput){
         if (tweet.uuid === replyInput.name){
             if (addTweet(replyInput, tweet.replies)) {
                 document.getElementById("modal").style.display = "none"
+                // localStorage.setItem(`tweetReplies-${tweet.uuid}`)
             }
         }
     }
@@ -232,8 +237,11 @@ function render(){
     setTweetTexts()
 }
 
-// tweetsFromLocalStorage()
-render()
+const tweetsDataFromLocalStorage = JSON.parse(localStorage.getItem("tweetsData"))
+if (tweetsDataFromLocalStorage){
+    tweetsData = tweetsDataFromLocalStorage
+    render()
+}
 
 /* Generate UUIDs */
 function generateUuid(number){
