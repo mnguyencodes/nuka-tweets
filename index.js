@@ -42,6 +42,7 @@ function handleLikeAction(tweetId){
     targetTweetObj.likes += targetTweetObj.isLiked ? -1: 1
 
     targetTweetObj.isLiked = !targetTweetObj.isLiked
+    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
     render()
 }
 
@@ -52,6 +53,7 @@ function handleRetweetAction(tweetId){
     targetTweetObj.retweets += targetTweetObj.isRetweeted ? -1 : 1
 
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
+    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
     render() 
 }
 
@@ -120,7 +122,10 @@ function getFeedHtml(){
     let feedHtml = ``
     
     tweetsData.forEach(function(tweet){
-        
+        const tweetFromLocalStorage = JSON.parse(localStorage.getItem(`targetTweetObj-${tweet.uuid}`))
+        if (tweetFromLocalStorage){
+            tweet = tweetFromLocalStorage
+        }
         let likeIconClass = tweet.isLiked ? "liked" : ""
         let retweetIconClass = tweet.isRetweeted ? "retweeted" : ""
         
@@ -225,6 +230,7 @@ function render(){
     setTweetTexts()
 }
 
+// tweetsFromLocalStorage()
 render()
 
 /* Generate UUIDs */
