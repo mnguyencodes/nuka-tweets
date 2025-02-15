@@ -8,10 +8,10 @@ This project comes with some core functionality:
 - Users can add a message by typing in the input field and clicking the "Tweet" button.
 
 ## Project Goals (DONE)
-~~- Allow a user to delete a tweet~~
-~~- Save tweets, likes and retweets to localStorage~~
-~~- Add the ability to reply to a specific tweet~~
-~~- Personalize the project to become my own~~
+- ~~Allow a user to delete a tweet~~
+- ~~Save tweets, likes and retweets to localStorage~~
+- ~~Add the ability to reply to a specific tweet~~
+- ~~Personalize the project to become my own~~
 
 ## Known Limitations
 When clicking on the like/retweet icons, the page state is reset. For example, if a user uses the keyboard to like a tweet, the keyboard cursor position is reset. ~~Additionally, if a user deletes a post using the trash can or views replies, and then clicks the like/retweet icons, the deleted post and viewed replies are reset to their default state.~~
