@@ -1,5 +1,7 @@
-import { tweetsData } from "./data.js"
+import { data } from "./data.js"
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+
+let tweetsData = data
 
 document.addEventListener("click", handleInteraction)
 document.addEventListener("keydown", handleInteraction)
@@ -42,6 +44,7 @@ function handleLikeAction(tweetId){
     targetTweetObj.likes += targetTweetObj.isLiked ? -1: 1
 
     targetTweetObj.isLiked = !targetTweetObj.isLiked
+    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
     render()
 }
 
@@ -52,6 +55,7 @@ function handleRetweetAction(tweetId){
     targetTweetObj.retweets += targetTweetObj.isRetweeted ? -1 : 1
 
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
+    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
     render() 
 }
 
@@ -62,6 +66,7 @@ function handleReplyAction(replyId){
 function handleTweetBtnAction(){
     const tweetInput = document.getElementById("tweet-input")
     addTweet(tweetInput, tweetsData)
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
 }
 
 function handleCloseModalBtn(){
@@ -95,9 +100,9 @@ function handleReplyActionIcon(tweetId){
     const replyInputEl = document.getElementById("reply-input")
     replyInputEl.placeholder = `Reply to ${userHandle}`
 
-    /* Store UUID of tweet into name attribute of textarea input.
-    This allows me to find out **which tweet-replies array** to add
-    in the new reply. */
+    /* Store UUID of new reply tweet into name attribute of textarea 
+    input. This allows me to find out **which tweet-replies array** to 
+    add in the new reply. */
     replyInputEl.name = tweetId
 }
 
@@ -106,6 +111,7 @@ function handleReplyActionBtn(replyInput){
         if (tweet.uuid === replyInput.name){
             if (addTweet(replyInput, tweet.replies)) {
                 document.getElementById("modal").style.display = "none"
+                localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
             }
         }
     }
@@ -118,9 +124,13 @@ function handleTrashCanAction(tweetId){
 
 function getFeedHtml(){
     let feedHtml = ``
-    
+    let i = 0
     tweetsData.forEach(function(tweet){
-        
+        const tweetFromLocalStorage = JSON.parse(localStorage.getItem(`targetTweetObj-${tweet.uuid}`))
+        if (tweetFromLocalStorage){
+            tweet = tweetFromLocalStorage
+            tweetsData[i] = tweetFromLocalStorage
+        }
         let likeIconClass = tweet.isLiked ? "liked" : ""
         let retweetIconClass = tweet.isRetweeted ? "retweeted" : ""
         
@@ -189,6 +199,7 @@ function getFeedHtml(){
         </div>   
     </div>
     `
+    i++
    })
    return feedHtml 
 }
@@ -215,6 +226,7 @@ function removeTweet(tweetId){
         const tweetPost = tweetsData[i]
         if (tweetPost.uuid === tweetId){
             tweetsData.splice(i, 1)
+            localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
             break
         }
     }
@@ -225,7 +237,11 @@ function render(){
     setTweetTexts()
 }
 
-render()
+const tweetsDataFromLocalStorage = JSON.parse(localStorage.getItem("tweetsData"))
+if (tweetsDataFromLocalStorage){
+    tweetsData = tweetsDataFromLocalStorage
+    render()
+}
 
 /* Generate UUIDs */
 function generateUuid(number){
