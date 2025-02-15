@@ -227,6 +227,7 @@ function removeTweet(tweetId){
         const tweetPost = tweetsData[i]
         if (tweetPost.uuid === tweetId){
             tweetsData.splice(i, 1)
+            localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
             break
         }
     }
