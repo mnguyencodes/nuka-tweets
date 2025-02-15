@@ -88,7 +88,6 @@ function addTweet(inputEl, arr){
         isRetweeted: false,
         uuid: uuidv4()
     })
-    localStorage.setItem(`${inputEl}`, JSON.stringify(arr))
     render()
     inputEl.value = ""
     return true
@@ -101,9 +100,9 @@ function handleReplyActionIcon(tweetId){
     const replyInputEl = document.getElementById("reply-input")
     replyInputEl.placeholder = `Reply to ${userHandle}`
 
-    /* Store UUID of tweet into name attribute of textarea input.
-    This allows me to find out **which tweet-replies array** to add
-    in the new reply. */
+    /* Store UUID of new reply tweet into name attribute of textarea 
+    input. This allows me to find out **which tweet-replies array** to 
+    add in the new reply. */
     replyInputEl.name = tweetId
 }
 
@@ -112,7 +111,7 @@ function handleReplyActionBtn(replyInput){
         if (tweet.uuid === replyInput.name){
             if (addTweet(replyInput, tweet.replies)) {
                 document.getElementById("modal").style.display = "none"
-                // localStorage.setItem(`tweetReplies-${tweet.uuid}`)
+                localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
             }
         }
     }
