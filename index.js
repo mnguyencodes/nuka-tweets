@@ -44,7 +44,7 @@ function handleLikeAction(tweetId){
     targetTweetObj.likes += targetTweetObj.isLiked ? -1: 1
 
     targetTweetObj.isLiked = !targetTweetObj.isLiked
-    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
     render()
 }
 
@@ -55,7 +55,7 @@ function handleRetweetAction(tweetId){
     targetTweetObj.retweets += targetTweetObj.isRetweeted ? -1 : 1
 
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
-    localStorage.setItem(`targetTweetObj-${tweetId}`, JSON.stringify(targetTweetObj))
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
     render() 
 }
 
